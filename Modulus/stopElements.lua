@@ -14,7 +14,7 @@ function resumeButton(where, x, y)
         id = where,
         label = "RESUME",
         value = "RESUME",
-        onRelease = switch,
+        onRelease = perform,
         shape = "roundedRect",
         x = x,
         y = y,
@@ -30,11 +30,7 @@ function restartButton(where, x, y)
     restart = widget.newButton({
         id = where,
         label = "RESTART",
-        onRelease = function(event)
-            writeRondomFile(fileName)
-            grid = readFile(fileName) -- read the initial state of the grid
-            switch(event)
-        end,
+        onRelease = switch,
         shape = "roundedRect",
         x = x,
         y = y,
@@ -50,7 +46,11 @@ end
 function saveButton(x, y)
     save = widget.newButton({
         -- id=where,
-        onRelease = switch,
+        onRelease = function(event)
+            writeRondomFile(fileName)
+            grid = readFile(fileName) -- read the initial state of the grid
+            switch(event)
+        end,
         shape = "roundedRect",
         x = x,
         y = y,

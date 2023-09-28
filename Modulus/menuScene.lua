@@ -28,15 +28,22 @@ end
 function scene:create(event)
     sceneGroup = self.view
     buttonGroup = display.newGroup(); -- initialise group of buttons on scene
-
-    writeRondomFile(fileName)
-    grid = readFile(fileName) -- read the initial state of the 
-
     local where = "Modulus.cellScene"
     randomButton(where, width / 2, height / 5)
 
 end
+-- show()
+function scene:show(event)
+    local phase = event.phase
+    local sceneGroup = self.view
+    if (phase == "will") then
+        writeRondomFile(fileName)
+        grid = readFile(fileName) -- read the initial state of the 
 
+    elseif (phase == "did") then
+
+    end
+end
 -- hide()
 function scene:hide(event)
 
@@ -60,6 +67,7 @@ function scene:destroy(event)
 
 end
 scene:addEventListener("create", scene)
+scene:addEventListener("show", scene)
 scene:addEventListener("hide", scene)
 scene:addEventListener("destroy", scene)
 

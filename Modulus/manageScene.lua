@@ -22,8 +22,12 @@ end
 -- create function of idling state of living cell
 function stopSimulation()
     removeElements(buttonGroup) -- remove button elements of scene
-    removeElements(sceneGroup) -- remove button elements of scene
-    cancelTimer() -- null the timer to avoid incongruency if scene is recalled
+    -- removeElements(sceneGroup) -- remove button elements of scene
+    if isUpdating then
+        cancelTimer() -- null the timer to avoid incongruency if scene is recalled
+        isUpdating = false
+    end
+
     createGrid(sceneGroup, grid) -- display last grid
 
     buttonWidth = width / 2
@@ -38,15 +42,13 @@ function switch(event)
     local where = event.target.id
 
     removeElements(buttonGroup) -- remove button elements of scene
-    cancelTimer() -- null the timer to avoid incongruency if scene is recalled
 
-    local options = {
-        effect = effect,
-        time = 10,
-        params = {
-            grid = grid
-        }
-    }
+    if isUpdating then
+        cancelTimer() -- null the timer to avoid incongruency if scene is recalled
+        isUpdating = false
+    end
+    removeElements(sceneGroup) -- remove button elements of scene
+
     composer.gotoScene(where, options)
 end
 

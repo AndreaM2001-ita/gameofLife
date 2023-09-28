@@ -13,6 +13,8 @@ local widget = require("widget")
 
 local group = display.newGroup()
 
+isUpdating = false -- Flag to track whether the update is running or not
+
 -- function to create a button on screen to stop iterations 
 function stopButton(x, y)
     stop = widget.newButton({
@@ -37,10 +39,10 @@ function createGrid(sceneGroup, grid)
     local zeroX = width / 2 - rectWidth / 2 + size / 2 -- x starting point of grid
     local zeroY = math.floor((height / 4) - rectWidth / 2) -- y starting point of grid
 
-    local y = 1
+    local x = 1
     local counter = 1
     for i = zeroX, zeroX + (size * cellNumber - 1), size do
-        local x = 1
+        local y = 1
         for j = zeroY, zeroY + (size * cellNumber - 1), size do
             local key = x .. "," .. y
             local rect = display.newRect(sceneGroup, i, j, size, size)
@@ -52,10 +54,10 @@ function createGrid(sceneGroup, grid)
             table.insert(group, counter, rect)
             sceneGroup:insert(rect)
             counter = counter + 1
-            x = x + 1
+            y = y + 1
         end
         counter = counter + 1
-        y = y + 1
+        x = x + 1
     end
 end
 -- function to display grid 
@@ -77,10 +79,19 @@ function displayGrid(sceneGroup, grid)
 end
 
 function perform()
-    myTimer = timer.performWithDelay(100, function()
-        grid = updateGrid(grid)
-        displayGrid(sceneGroup, grid) -- recall grid repeadedly at an interval of 1 second
-    end, 0)
+
+    if grid ~= nil then
+        createGrid(sceneGroup, grid) -- display last grid
+    end
+    stopButton(width / 2, height / 1.7)
+    if not isUpdating then
+        isUpdating = true
+        myTimer = timer.performWithDelay(100, function()
+            grid = updateGrid(grid)
+            displayGrid(sceneGroup, grid) -- recall grid repeadedly at an interval of 1 second
+        end, 0)
+
+    end
 end
 -- create scene
 function scene:create(event)
@@ -90,10 +101,7 @@ function scene:create(event)
     if params and params.grid then
         grid = params.grid
     end
-
-    if grid ~= nil then
-        createGrid(sceneGroup, grid) -- display last grid
-    end
+    perform()
 
 end
 
@@ -102,8 +110,7 @@ function scene:show(event)
     local phase = event.phase
     local sceneGroup = self.view
     if (phase == "will") then
-        stopButton(width / 2, height / 1.7)
-        perform()
+
     elseif (phase == "did") then
 
     end

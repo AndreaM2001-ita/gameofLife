@@ -86,7 +86,6 @@ function checkValue(grid, tensDigit, onesDigit)
     if tensDigits == 1 or tensDigits == cellNumber or onesDigit == 1 or onesDigit == cellNumber then -- control only borders to improve efficiency
         grid = addLogicalBorders(grid, tensDigit, onesDigit) -- add logical border to create outer link
     end
-
     local mask = createUnderGrid(grid, tensDigit, onesDigit) -- create 3 by 3 undergrid to prepare for the sum
     local counter = sumMaskValues(mask, tensDigit, onesDigit) -- sum of neighbors cells
     return counter
