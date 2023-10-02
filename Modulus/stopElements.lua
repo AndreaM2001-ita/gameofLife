@@ -25,6 +25,7 @@ function resumeButton(where, x, y)
     buttonGroup:insert(resume)
     return resume
 end
+
 -- button to restart with a new state of grid
 function restartButton(where, x, y)
     restart = widget.newButton({
@@ -38,28 +39,26 @@ function restartButton(where, x, y)
         height = 45,
         color = fillColor
     });
-    restart:addEventListener("tap", switch)
     buttonGroup:insert(restart)
     return restart
 end
+function saving(event)
+    event.target.alpha = 0.2 -- make the save button fade
+    event.target:removeEventListener("tap", saving) -- remove its listener to avoid same state more than once
+    saveNewData(fileName, grid)
+end
 -- button to save current state of grid
 function saveButton(x, y)
-    save = widget.newButton({
-        -- id=where,
-        onRelease = function(event)
-            writeRondomFile(fileName)
-            grid = readFile(fileName) -- read the initial state of the grid
-            switch(event)
-        end,
+    saveB = widget.newButton({
+        -- id = where,
+        label = "SAVE",
         shape = "roundedRect",
         x = x,
         y = y,
-        width = 70,
-        height = 70,
-        label = "SAVE",
-        color = fillColor
-
+        width = 80,
+        height = 80
     });
-    buttonGroup:insert(save)
+    saveB:addEventListener("tap", saving)
+    buttonGroup:insert(saveB)
     return save
 end
