@@ -9,21 +9,23 @@ require("Tests.unitTesting") -- modulus that contains all the unit testing requi
 
 require("Tests.blackBoxTesting") -- modulus that contains all the unit testing required
 
-cellNumber = 20 -- number of cells per side 
-fileName = "Data/grid.txt" -- name of the final contining initial grid
---[[
+require("Tests.UITesting")
+
+width = display.actualContentWidth
+height = display.actualContentHeight
+
+cellNumber = 30 -- number of cells per side 
+fileName = "grid.json" -- name of the final contining initial grid
+
 print("===============================START OF TESTING====================================")
 
 unitTesting() -- start unitTesting
 blackBoxTesting() -- start blackBoxTesting
+UITesting() -- start user interface testing
 
 print("=================================END OF TESTING====================================")
-]] --
 
 local composer = require("composer") -- composer module
-
-width = display.actualContentWidth
-height = display.actualContentHeight
 
 local options = {
     effect = effect,

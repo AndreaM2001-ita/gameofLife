@@ -13,7 +13,8 @@ function blackBoxTesting()
     print("---------------------------------Running BlackBox Testing----------------------------")
     print("\n")
 
-    ---------------RUN tests
+    ---------------RUN tests----------------DEPRECATED
+    --[[
     print("---------------------------Running tests for cellTable module---------------------")
     local fileName = "Data/grid.txt" -- initiating needed variables for testing
     local grid = readFile(fileName)
@@ -21,6 +22,18 @@ function blackBoxTesting()
     createUnderGrid_Test(grid)
     print("2)testing function that updates grid, by printing next state ")
     updateGrid_test(grid)
+    ]] --
+    local fileName = "grid.json" -- initiating needed variables for testing
+    local a = cellNumber -- storing usual value of cellNumber
+    cellNumber = 5 -- changing value of cellnumber to make tetsing more accessible 
+    local grid = createRandomGrid()
+    printGrid(grid)
+
+    print("1)testing creating 3x3 matrix for each cell to calculate sum function")
+    createUnderGrid_Test(grid)
+    print("2)testing function that updates grid, by printing next state ")
+    updateGrid_test(grid)
+    cellNumber = a
 
 end
 

@@ -23,7 +23,8 @@ function unitTesting()
     print("E=>Error")
     print("OK=>function return expected result")
 
-    ---------------RUN tests
+    ---------------RUN tests----------------DEPRECATED
+    --[[
     print("---------------------------Running tests for cellFile module---------------------")
     local errors = ""
     print("1 & 2) testing open and close file function")
@@ -31,11 +32,22 @@ function unitTesting()
     print("3) testing read file function")
     errors = readFile_Test(errors)
     printResults(errors)
+    ]] --
+    local errors = ""
+    printResults(errors)
+    print("1 & 2) testing open and close file function")
+    errors = openFile_Test(errors)
+    print("3) testing read file function")
+    errors = readWriteFile_Test(errors)
+    errors = isJSONEmpty_Test(errors)
+    printResults(errors)
 
     print("---------------------------Running tests for cellTable module---------------------")
     errors = ""
-    local fileName = "Data/grid.txt" -- initiating needed variables for testing
-    local grid = readFile(fileName)
+    -- local fileName = "Data/grid.txt" -- initiating needed variables for testing
+    -- local grid = readFile(fileName)
+    local fileName = "grid.json" -- initiating needed variables for testing
+    local grid = createRandomGrid()
 
     print("1)testing addLogicalBorders function")
     errors, grid = addLogicalBorders_Test(errors, grid)
