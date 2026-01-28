@@ -9,16 +9,15 @@ require("Tests.unitTesting") -- modulus that contains all the unit testing requi
 
 require("Tests.blackBoxTesting") -- modulus that contains all the unit testing required
 
-<<<<<<< HEAD
 require("Tests.UITesting")
 
 width = display.actualContentWidth
 height = display.actualContentHeight
 
 cellNumber = 30 -- number of cells per side 
-=======
-cellNumber = 70 -- number of cells per side 
->>>>>>> 37caabeebbec6966126daf0f317b45fcfbe54fc7
+
+-- cellNumber = 70 -- number of cells per side 
+
 fileName = "grid.json" -- name of the final contining initial grid
 
 print("===============================START OF TESTING====================================")

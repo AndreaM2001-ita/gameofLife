@@ -51,11 +51,7 @@ function onTouch(event)
         -- Calculate the offset between touch position and button center
         touchOffsetX = event.x - target.x
         isDragging = true
-<<<<<<< HEAD
     elseif target.isFocus then -- if the button is still clicked
-=======
-    elseif target.isFocus then
->>>>>>> 37caabeebbec6966126daf0f317b45fcfbe54fc7
         if phase == "moved" then
             target.x = event.x - touchOffsetX -- calculate difference between new and old position
 
@@ -118,15 +114,13 @@ function createGrid(sceneGroup, grid, position)
         x = x + 1
     end
     return sceneGroup
-<<<<<<< HEAD
 end
 -- functiom that return group created for testing features
 function returnGroup()
     if group then
         return group
     end
-=======
->>>>>>> 37caabeebbec6966126daf0f317b45fcfbe54fc7
+
 end
 -- function to display grid 
 function displayGrid(sceneGroup, grid)
